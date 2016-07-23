@@ -14,18 +14,40 @@ public class MainPagerAdapter extends FragmentPagerAdapter
     @Override
     public int getCount()
     {
-        return 1;
+        return 2;
     }
 
     @Override
     public Fragment getItem(int position)
     {
-        return new GaugeFragment();
+        if (position == 0)
+        {
+            return new GaugeFragment();
+        }
+        else if (position == 1)
+        {
+            return new LightFragment();
+        }
+        else
+        {
+            return null;
+        }
     }
 
     @Override
     public String getPageTitle(int position)
     {
-        return "Gauges";
+        if (position == 0)
+        {
+            return "Gauges";
+        }
+        else if (position == 1)
+        {
+            return "Lights";
+        }
+        else
+        {
+            return null;
+        }
     }
 }
