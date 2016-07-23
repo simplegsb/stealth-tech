@@ -2,7 +2,6 @@ package nz.stealthcampers.stealthtech;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
@@ -51,7 +50,7 @@ public class GaugeAdapter extends BaseAdapter
         Gauge gauge = gauges.get(position);
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View gaugeFragment = inflater.inflate(R.layout.gauge_fragment, null);
+        View gaugeFragment = inflater.inflate(R.layout.gauge, null);
 
         gaugeFragment.setLayoutParams(new GridView.LayoutParams(gaugeSize, gaugeSize));
         gaugeFragment.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in));
