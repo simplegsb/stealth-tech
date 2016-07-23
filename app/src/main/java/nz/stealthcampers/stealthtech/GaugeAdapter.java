@@ -56,7 +56,7 @@ public class GaugeAdapter extends BaseAdapter
         gaugeFragment.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in));
 
         // Ummm... why do I need to do this?
-        int primaryColorWithAlpha = Color.parseColor(context.getResources().getString(R.color.colorPrimary));
+        int primaryColorWithAlpha = Color.parseColor(context.getResources().getString(R.color.primary));
 
         ImageView icon = (ImageView) gaugeFragment.findViewById(R.id.icon);
         icon.setColorFilter(primaryColorWithAlpha, PorterDuff.Mode.SRC_ATOP);
