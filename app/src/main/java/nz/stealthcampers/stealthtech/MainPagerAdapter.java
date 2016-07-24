@@ -14,7 +14,7 @@ public class MainPagerAdapter extends FragmentPagerAdapter
     @Override
     public int getCount()
     {
-        return 2;
+        return 3;
     }
 
     @Override
@@ -27,6 +27,10 @@ public class MainPagerAdapter extends FragmentPagerAdapter
         else if (position == 1)
         {
             return new LightFragment();
+        }
+        else if (position == 2)
+        {
+            return new ControlPanelFragment();
         }
         else
         {
@@ -44,6 +48,10 @@ public class MainPagerAdapter extends FragmentPagerAdapter
         else if (position == 1)
         {
             return "Lights";
+        }
+        else if (position == 2)
+        {
+            return "Control Panel";
         }
         else
         {
