@@ -12,6 +12,7 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import java.util.List;
 
@@ -50,25 +51,22 @@ public class GaugeAdapter extends BaseAdapter
         Gauge gauge = gauges.get(position);
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View gaugeFragment = inflater.inflate(R.layout.gauge, null);
+        View gaugeView = inflater.inflate(R.layout.gauge, null);
 
-        gaugeFragment.setLayoutParams(new GridView.LayoutParams(gaugeSize, gaugeSize));
-        gaugeFragment.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in));
+        gaugeView.setLayoutParams(new GridView.LayoutParams(gaugeSize, gaugeSize));
+        gaugeView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in));
 
-        // Ummm... why do I need to do this?
-        int primaryColorWithAlpha = Color.parseColor(context.getResources().getString(R.color.primary));
-
-        ImageView icon = (ImageView) gaugeFragment.findViewById(R.id.icon);
-        icon.setColorFilter(primaryColorWithAlpha, PorterDuff.Mode.SRC_ATOP);
-        icon.setImageResource(gauge.getIconResource());
+        ImageView iconView = (ImageView) gaugeView.findViewById(R.id.icon);
+        iconView.setImageResource(gauge.getIconResource());
+        Util.colorize(context, iconView, R.color.colorPrimary);
 
         int value = gauge.getValue();
 
-        ObjectAnimator animation = ObjectAnimator.ofInt(gaugeFragment.findViewById(R.id.gauge), "progress", 0, value);
+        ObjectAnimator animation = ObjectAnimator.ofInt(gaugeView.findViewById(R.id.gauge), "progress", 0, value);
         animation.setDuration(value * 10);
         animation.setInterpolator(new DecelerateInterpolator());
         animation.start();
 
-        return gaugeFragment;
+        return gaugeView;
     }
 }

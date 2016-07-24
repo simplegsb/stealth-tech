@@ -19,6 +19,6 @@ public class MainActivity extends FragmentActivity
 
         PagerTabStrip tabStrip = (PagerTabStrip) pager.findViewById(R.id.tab_strip);
         tabStrip.setDrawFullUnderline(false);
-        tabStrip.setTabIndicatorColor(ContextCompat.getColor(this, R.color.primary));
+        tabStrip.setTabIndicatorColor(ContextCompat.getColor(this, R.color.colorPrimary));
     }
 }
