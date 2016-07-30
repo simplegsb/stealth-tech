@@ -82,6 +82,18 @@ public class ControlPanelActivity extends Activity
         };
         items.add(fridge);
 
+        final GridItemView heater = GridItemView.inflate(this);
+        heater.iconResource = R.drawable.heater;
+        heater.listener = new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                heater.animateValue(Math.abs(heater.value - 1));
+            }
+        };
+        items.add(heater);
+
         new Handler().postDelayed(new Runnable()
         {
             @Override
