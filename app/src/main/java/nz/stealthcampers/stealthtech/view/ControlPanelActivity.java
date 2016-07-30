@@ -29,6 +29,7 @@ public class ControlPanelActivity extends Activity
         water.iconResource = R.drawable.water;
         water.gauge = true;
         water.value = 50;
+        water.secondaryValue = 60;
         water.listener = new View.OnClickListener()
         {
             @Override

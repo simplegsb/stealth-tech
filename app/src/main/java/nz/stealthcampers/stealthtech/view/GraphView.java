@@ -51,11 +51,16 @@ public class GraphView extends View
         curvePaint = new Paint();
         curvePaint.setStrokeWidth(10.0f);
         curvePaint.setStrokeCap(Paint.Cap.ROUND);
-        curvePaint.setColor(ContextCompat.getColor(getContext(), (R.color.colorPrimary)));
+        curvePaint.setColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
 
         scalePaint = new Paint();
         scalePaint.setStrokeWidth(10.0f);
-        scalePaint.setColor(ContextCompat.getColor(getContext(), (R.color.colorBackgroundDark)));
+        scalePaint.setColor(ContextCompat.getColor(getContext(), R.color.colorBackgroundDark));
+    }
+
+    public void setColor(int color)
+    {
+        curvePaint.setColor(ContextCompat.getColor(getContext(), color));
     }
 
     public void setValues(List<Integer> values)

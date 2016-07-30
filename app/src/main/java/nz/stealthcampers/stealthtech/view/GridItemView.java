@@ -23,6 +23,8 @@ public class GridItemView extends RelativeLayout
 
     public View.OnClickListener listener;
 
+    public int secondaryValue;
+
     public int value;
 
     public static GridItemView inflate(Context context)
@@ -81,6 +83,20 @@ public class GridItemView extends RelativeLayout
             outlineBackground.setMax(120);
             outlineBackground.setProgress(100);
             outlineBackground.setRotation(120);
+
+            int innerPadding = (int) (size * 0.09f);
+
+            ProgressBar innerOutline = (ProgressBar) findViewById(R.id.inner_outline);
+            innerOutline.setMax(120);
+            innerOutline.setPadding(innerPadding, innerPadding, innerPadding, innerPadding);
+            innerOutline.setProgress(0);
+            innerOutline.setRotation(120);
+
+            ProgressBar innerOutlineBackground = (ProgressBar) findViewById(R.id.inner_outline_background);
+            innerOutlineBackground.setMax(120);
+            innerOutlineBackground.setPadding(innerPadding, innerPadding, innerPadding, innerPadding);
+            innerOutlineBackground.setProgress(100);
+            innerOutlineBackground.setRotation(120);
         }
     }
 
@@ -111,6 +127,18 @@ public class GridItemView extends RelativeLayout
             ObjectAnimator animator = ObjectAnimator.ofInt(outline, "progress", 0, value);
             animator.setDuration(value * 10);
             animator.start();
+
+            if (secondaryValue > 0)
+            {
+                ProgressBar innerOutlineBackground = (ProgressBar) findViewById(R.id.inner_outline_background);
+                innerOutlineBackground.setVisibility(VISIBLE);
+
+                ProgressBar innerOutline = (ProgressBar) findViewById(R.id.inner_outline);
+                innerOutline.setVisibility(VISIBLE);
+                ObjectAnimator innerAnimator = ObjectAnimator.ofInt(innerOutline, "progress", 0, secondaryValue);
+                innerAnimator.setDuration(secondaryValue * 10);
+                innerAnimator.start();
+            }
         }
         else
         {

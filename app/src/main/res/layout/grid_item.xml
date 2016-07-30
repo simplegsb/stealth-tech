@@ -17,7 +17,7 @@
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:progress="100"
-        android:progressDrawable="@drawable/gauge_background"
+        android:progressDrawable="@drawable/grid_outline_background"
         style="?android:attr/progressBarStyleHorizontal" />
 
     <ProgressBar
@@ -26,7 +26,27 @@
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:progress="100"
-        android:progressDrawable="@drawable/gauge"
+        android:progressDrawable="@drawable/grid_outline"
+        android:visibility="invisible"
+        style="?android:attr/progressBarStyleHorizontal" />
+
+    <ProgressBar
+        android:id="@+id/inner_outline_background"
+        android:layout_centerInParent="true"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:progress="100"
+        android:progressDrawable="@drawable/grid_inner_outline_background"
+        android:visibility="invisible"
+        style="?android:attr/progressBarStyleHorizontal" />
+
+    <ProgressBar
+        android:id="@+id/inner_outline"
+        android:layout_centerInParent="true"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:progress="100"
+        android:progressDrawable="@drawable/grid_inner_outline"
         android:visibility="invisible"
         style="?android:attr/progressBarStyleHorizontal" />
 
