@@ -73,6 +73,14 @@ public class ControlPanelActivity extends Activity
         fuelView.iconResource = R.drawable.fuel;
         fuelView.gauge = true;
         fuelView.value = MyVan.fuel.get(MyVan.fuel.size() - 1);
+        fuelView.listener = new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                startActivity(new Intent(ControlPanelActivity.this, FuelActivity.class));
+            }
+        };
         items.add(fuelView);
 
         GridItemView lightView = GridItemView.inflate(this);

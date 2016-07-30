@@ -51,7 +51,7 @@ public class BatteryActivity extends Activity
                 batteryView.setVisibility(View.VISIBLE);
 
                 GraphView freshHistoryView = (GraphView) findViewById(R.id.history);
-                freshHistoryView.setValues(MyVan.freshWater);
+                freshHistoryView.setValues(MyVan.battery);
                 freshHistoryView.setVisibility(View.VISIBLE);
             }
         }, Constants.SHOW_DELAY);
