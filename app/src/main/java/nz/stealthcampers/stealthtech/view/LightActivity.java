@@ -33,9 +33,9 @@ public class LightActivity extends Activity
             @Override
             public void run()
             {
-                View root = findViewById(R.id.root);
-                root.setVisibility(View.VISIBLE);
-                root.startAnimation(AnimationUtils.loadAnimation(LightActivity.this, R.anim.fade_in));
+                View rootView = findViewById(R.id.root);
+                rootView.setVisibility(View.VISIBLE);
+                rootView.startAnimation(AnimationUtils.loadAnimation(LightActivity.this, R.anim.fade_in));
 
                 ViewGroup vanContainerView = (ViewGroup) findViewById(R.id.van_container);
                 for (final Light light : MyVan.lights)

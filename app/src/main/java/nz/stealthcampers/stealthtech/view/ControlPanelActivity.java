@@ -26,12 +26,12 @@ public class ControlPanelActivity extends Activity
 
         List<GridItemView> items = new ArrayList<>();
 
-        GridItemView water = GridItemView.inflate(this);
-        water.iconResource = R.drawable.water;
-        water.gauge = true;
-        water.value = MyVan.freshWater.get(MyVan.freshWater.size() - 1);
-        water.secondaryValue = MyVan.wasteWater.get(MyVan.wasteWater.size() - 1);
-        water.listener = new View.OnClickListener()
+        GridItemView waterView = GridItemView.inflate(this);
+        waterView.iconResource = R.drawable.water;
+        waterView.gauge = true;
+        waterView.value = MyVan.freshWater.get(MyVan.freshWater.size() - 1);
+        waterView.secondaryValue = MyVan.wasteWater.get(MyVan.wasteWater.size() - 1);
+        waterView.listener = new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
@@ -39,29 +39,37 @@ public class ControlPanelActivity extends Activity
                 startActivity(new Intent(ControlPanelActivity.this, WaterActivity.class));
             }
         };
-        items.add(water);
+        items.add(waterView);
 
-        GridItemView gas = GridItemView.inflate(this);
-        gas.iconResource = R.drawable.gas;
-        gas.gauge = true;
-        gas.value = MyVan.gas.get(MyVan.gas.size() - 1);
-        items.add(gas);
+        GridItemView gasView = GridItemView.inflate(this);
+        gasView.iconResource = R.drawable.gas;
+        gasView.gauge = true;
+        gasView.value = MyVan.gas.get(MyVan.gas.size() - 1);
+        gasView.listener = new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                startActivity(new Intent(ControlPanelActivity.this, GasActivity.class));
+            }
+        };
+        items.add(gasView);
 
-        GridItemView battery = GridItemView.inflate(this);
-        battery.iconResource = R.drawable.battery;
-        battery.gauge = true;
-        battery.value = MyVan.battery.get(MyVan.battery.size() - 1);
-        items.add(battery);
+        GridItemView batteryView = GridItemView.inflate(this);
+        batteryView.iconResource = R.drawable.battery;
+        batteryView.gauge = true;
+        batteryView.value = MyVan.battery.get(MyVan.battery.size() - 1);
+        items.add(batteryView);
 
-        GridItemView fuel = GridItemView.inflate(this);
-        fuel.iconResource = R.drawable.fuel;
-        fuel.gauge = true;
-        fuel.value = MyVan.fuel.get(MyVan.fuel.size() - 1);
-        items.add(fuel);
+        GridItemView fuelView = GridItemView.inflate(this);
+        fuelView.iconResource = R.drawable.fuel;
+        fuelView.gauge = true;
+        fuelView.value = MyVan.fuel.get(MyVan.fuel.size() - 1);
+        items.add(fuelView);
 
-        GridItemView light = GridItemView.inflate(this);
-        light.iconResource = R.drawable.light;
-        light.listener = new View.OnClickListener()
+        GridItemView lightView = GridItemView.inflate(this);
+        lightView.iconResource = R.drawable.light;
+        lightView.listener = new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
@@ -69,47 +77,47 @@ public class ControlPanelActivity extends Activity
                 startActivity(new Intent(ControlPanelActivity.this, LightActivity.class));
             }
         };
-        items.add(light);
+        items.add(lightView);
 
-        final GridItemView fridge = GridItemView.inflate(this);
-        fridge.iconResource = R.drawable.fridge;
-        fridge.value = MyVan.fridge ? 1 : 0;
-        fridge.listener = new View.OnClickListener()
+        final GridItemView fridgeView = GridItemView.inflate(this);
+        fridgeView.iconResource = R.drawable.fridge;
+        fridgeView.value = MyVan.fridge ? 1 : 0;
+        fridgeView.listener = new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
-                fridge.animateValue(Math.abs(fridge.value - 1));
+                fridgeView.animateValue(Math.abs(fridgeView.value - 1));
             }
         };
-        items.add(fridge);
+        items.add(fridgeView);
 
-        final GridItemView heater = GridItemView.inflate(this);
-        heater.iconResource = R.drawable.heater;
-        heater.value = MyVan.heater ? 1 : 0;
-        heater.listener = new View.OnClickListener()
+        final GridItemView heaterView = GridItemView.inflate(this);
+        heaterView.iconResource = R.drawable.heater;
+        heaterView.value = MyVan.heater ? 1 : 0;
+        heaterView.listener = new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
-                heater.animateValue(Math.abs(heater.value - 1));
+                heaterView.animateValue(Math.abs(heaterView.value - 1));
             }
         };
-        items.add(heater);
+        items.add(heaterView);
 
         new Handler().postDelayed(new Runnable()
         {
             @Override
             public void run()
             {
-                View root = findViewById(R.id.root);
-                root.setVisibility(View.VISIBLE);
-                root.startAnimation(AnimationUtils.loadAnimation(ControlPanelActivity.this, R.anim.fade_in));
+                View rootView = findViewById(R.id.root);
+                rootView.setVisibility(View.VISIBLE);
+                rootView.startAnimation(AnimationUtils.loadAnimation(ControlPanelActivity.this, R.anim.fade_in));
             }
         }, Constants.SHOW_DELAY);
 
-        GridView gridview = (GridView) findViewById(R.id.controls);
-        gridview.setAdapter(new GridAdapter(items));
-        gridview.setColumnWidth(Util.getGridItemSize(this));
+        GridView gridView = (GridView) findViewById(R.id.controls);
+        gridView.setAdapter(new GridAdapter(items));
+        gridView.setColumnWidth(Util.getGridItemSize(this));
     }
 }

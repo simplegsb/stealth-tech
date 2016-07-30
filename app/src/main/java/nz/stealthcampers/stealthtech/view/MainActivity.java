@@ -26,9 +26,9 @@ public class MainActivity extends Activity
 
         List<GridItemView> items = new ArrayList<>();
 
-        GridItemView controlPanel = GridItemView.inflate(this);
-        controlPanel.iconResource = R.drawable.van;
-        controlPanel.listener = new View.OnClickListener()
+        GridItemView controlPanelView = GridItemView.inflate(this);
+        controlPanelView.iconResource = R.drawable.van;
+        controlPanelView.listener = new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
@@ -36,11 +36,11 @@ public class MainActivity extends Activity
                 startActivity(new Intent(MainActivity.this, ControlPanelActivity.class));
             }
         };
-        items.add(controlPanel);
+        items.add(controlPanelView);
 
-        GridItemView map = GridItemView.inflate(this);
-        map.iconResource = R.drawable.map;
-        map.listener = new View.OnClickListener()
+        GridItemView mapView = GridItemView.inflate(this);
+        mapView.iconResource = R.drawable.map;
+        mapView.listener = new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
@@ -48,25 +48,25 @@ public class MainActivity extends Activity
                 startActivity(new Intent(MainActivity.this, MapActivity.class));
             }
         };
-        items.add(map);
+        items.add(mapView);
 
-        GridItemView chat = GridItemView.inflate(this);
-        chat.iconResource = R.drawable.chat;
-        items.add(chat);
+        GridItemView chatView = GridItemView.inflate(this);
+        chatView.iconResource = R.drawable.chat;
+        items.add(chatView);
 
         new Handler().postDelayed(new Runnable()
         {
             @Override
             public void run()
             {
-                View root = findViewById(R.id.root);
-                root.setVisibility(View.VISIBLE);
-                root.startAnimation(AnimationUtils.loadAnimation(MainActivity.this, R.anim.fade_in));
+                View rootView = findViewById(R.id.root);
+                rootView.setVisibility(View.VISIBLE);
+                rootView.startAnimation(AnimationUtils.loadAnimation(MainActivity.this, R.anim.fade_in));
             }
         }, Constants.SHOW_DELAY);
 
-        GridView gridview = (GridView) findViewById(R.id.activities);
-        gridview.setAdapter(new GridAdapter(items));
-        gridview.setColumnWidth(Util.getGridItemSize(this));
+        GridView gridView = (GridView) findViewById(R.id.activities);
+        gridView.setAdapter(new GridAdapter(items));
+        gridView.setColumnWidth(Util.getGridItemSize(this));
     }
 }

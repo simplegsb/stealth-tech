@@ -19,24 +19,24 @@ public class WaterActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_water);
 
-        final GridItemView water = GridItemView.inflate(this);
-        water.iconResource = R.drawable.water;
-        water.gauge = true;
-        water.value = MyVan.freshWater.get(MyVan.freshWater.size() - 1);
-        water.secondaryValue = MyVan.wasteWater.get(MyVan.wasteWater.size() - 1);
+        final GridItemView waterView = GridItemView.inflate(this);
+        waterView.iconResource = R.drawable.water;
+        waterView.gauge = true;
+        waterView.value = MyVan.freshWater.get(MyVan.freshWater.size() - 1);
+        waterView.secondaryValue = MyVan.wasteWater.get(MyVan.wasteWater.size() - 1);
 
         new Handler().postDelayed(new Runnable()
         {
             @Override
             public void run()
             {
-                View root = findViewById(R.id.root);
-                root.setVisibility(View.VISIBLE);
-                root.startAnimation(AnimationUtils.loadAnimation(WaterActivity.this, R.anim.fade_in));
+                View rootView = findViewById(R.id.root);
+                rootView.setVisibility(View.VISIBLE);
+                rootView.startAnimation(AnimationUtils.loadAnimation(WaterActivity.this, R.anim.fade_in));
 
                 ViewGroup topView = (ViewGroup) findViewById(R.id.top);
-                topView.addView(water, 0);
-                water.setVisibility(View.VISIBLE);
+                topView.addView(waterView, 0);
+                waterView.setVisibility(View.VISIBLE);
 
                 GraphView freshHistoryView = (GraphView) findViewById(R.id.fresh_history);
                 freshHistoryView.setValues(MyVan.freshWater);

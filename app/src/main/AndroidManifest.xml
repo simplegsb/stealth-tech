@@ -39,6 +39,11 @@
         </activity>
 
         <activity
+            android:name="nz.stealthcampers.stealthtech.view.GasActivity"
+            android:label="@string/gas">
+        </activity>
+
+        <activity
             android:name="nz.stealthcampers.stealthtech.view.LightActivity"
             android:label="@string/light">
         </activity>

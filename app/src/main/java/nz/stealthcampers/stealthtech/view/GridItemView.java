@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
@@ -56,6 +57,10 @@ public class GridItemView extends RelativeLayout
         if (getParent() instanceof GridView)
         {
             setLayoutParams(new GridView.LayoutParams(size, size));
+        }
+        else if (getParent() instanceof LinearLayout)
+        {
+            setLayoutParams(new LinearLayout.LayoutParams(size, size));
         }
         else if (getParent() instanceof RelativeLayout)
         {
