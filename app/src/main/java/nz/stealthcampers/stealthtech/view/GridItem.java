@@ -6,7 +6,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.AnimationUtils;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -80,10 +79,9 @@ public class GridItem
         {
             ProgressBar outline = (ProgressBar) view.findViewById(R.id.outline);
             outline.setVisibility(View.VISIBLE);
-            ObjectAnimator animation = ObjectAnimator.ofInt(outline, "progress", 0, value);
-            animation.setDuration(value * 10);
-            animation.setInterpolator(new DecelerateInterpolator());
-            animation.start();
+            ObjectAnimator animator = ObjectAnimator.ofInt(outline, "progress", 0, value);
+            animator.setDuration(value * 10);
+            animator.start();
         }
         else
         {
