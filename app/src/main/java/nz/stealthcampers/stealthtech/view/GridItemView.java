@@ -23,7 +23,7 @@ public class GridItemView extends RelativeLayout
 
     public View.OnClickListener listener;
 
-    public int secondaryValue;
+    public int secondaryValue = -1;
 
     public int value;
 
@@ -128,7 +128,7 @@ public class GridItemView extends RelativeLayout
             animator.setDuration(value * 10);
             animator.start();
 
-            if (secondaryValue > 0)
+            if (secondaryValue != -1)
             {
                 ProgressBar innerOutlineBackground = (ProgressBar) findViewById(R.id.inner_outline_background);
                 innerOutlineBackground.setVisibility(VISIBLE);
