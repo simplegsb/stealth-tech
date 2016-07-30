@@ -59,6 +59,14 @@ public class ControlPanelActivity extends Activity
         batteryView.iconResource = R.drawable.battery;
         batteryView.gauge = true;
         batteryView.value = MyVan.battery.get(MyVan.battery.size() - 1);
+        batteryView.listener = new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                startActivity(new Intent(ControlPanelActivity.this, BatteryActivity.class));
+            }
+        };
         items.add(batteryView);
 
         GridItemView fuelView = GridItemView.inflate(this);

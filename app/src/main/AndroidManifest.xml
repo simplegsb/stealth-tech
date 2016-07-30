@@ -34,6 +34,11 @@
             android:value="@string/google_maps_key" />
 
         <activity
+            android:name="nz.stealthcampers.stealthtech.view.BatteryActivity"
+            android:label="@string/battery">
+        </activity>
+
+        <activity
             android:name="nz.stealthcampers.stealthtech.view.ControlPanelActivity"
             android:label="@string/control_panel">
         </activity>

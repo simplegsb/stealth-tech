@@ -6,6 +6,8 @@ import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 
 import nz.stealthcampers.stealthtech.MyVan;
 import nz.stealthcampers.stealthtech.R;
@@ -24,6 +26,28 @@ public class WaterActivity extends Activity
         waterView.gauge = true;
         waterView.value = MyVan.freshWater.get(MyVan.freshWater.size() - 1);
         waterView.secondaryValue = MyVan.wasteWater.get(MyVan.wasteWater.size() - 1);
+
+        Switch waterHeaterView = (Switch) findViewById(R.id.water_heater);
+        waterHeaterView.setChecked(MyVan.waterHeater);
+        waterHeaterView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean checked)
+            {
+                MyVan.waterHeater = !MyVan.waterHeater;
+            }
+        });
+
+        Switch waterPumpView = (Switch) findViewById(R.id.water_pump);
+        waterPumpView.setChecked(MyVan.waterPump);
+        waterPumpView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean checked)
+            {
+                MyVan.waterPump = !MyVan.waterPump;
+            }
+        });
 
         new Handler().postDelayed(new Runnable()
         {

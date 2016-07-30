@@ -25,7 +25,13 @@ public class MyVan
 
     public static List<Light> lights = new ArrayList<>();
 
+    public static boolean power = false;
+
     public static List<Integer> wasteWater = new ArrayList<>();
+
+    public static boolean waterHeater = false;
+
+    public static boolean waterPump = false;
 
     private static Random random = new Random();
 
@@ -35,6 +41,9 @@ public class MyVan
 
         fridge = random.nextBoolean();
         heater = random.nextBoolean();
+        power = random.nextBoolean();
+        waterHeater = random.nextBoolean();
+        waterPump = random.nextBoolean();
 
         Light light0 = new Light();
         light0.on = random.nextBoolean();
