@@ -32,7 +32,7 @@ public class WaterActivity extends Activity
         final List<Integer> history = new ArrayList<>();
         for (int index = 0; index < 100; index++)
         {
-            history.add(nextValue);
+            history.add(Math.min(Math.max(nextValue, 0), 100));
             nextValue += (int) (random.nextFloat() * 10 - 5);
         }
 

@@ -8,6 +8,7 @@ import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.View;
 
+import java.util.Calendar;
 import java.util.List;
 
 import nz.stealthcampers.stealthtech.R;
@@ -16,7 +17,9 @@ public class GraphView extends View
 {
     private ValueAnimator animator;
 
-    private Paint paint;
+    private Paint curvePaint;
+
+    private Paint scalePaint;
 
     private List<Integer> values;
 
@@ -45,10 +48,14 @@ public class GraphView extends View
     {
         animator = ValueAnimator.ofFloat(0.0f, 1.0f);
 
-        paint = new Paint();
-        paint.setStrokeWidth(10.0f);
-        paint.setStrokeCap(Paint.Cap.ROUND);
-        paint.setColor(ContextCompat.getColor(getContext(), (R.color.colorPrimary)));
+        curvePaint = new Paint();
+        curvePaint.setStrokeWidth(10.0f);
+        curvePaint.setStrokeCap(Paint.Cap.ROUND);
+        curvePaint.setColor(ContextCompat.getColor(getContext(), (R.color.colorPrimary)));
+
+        scalePaint = new Paint();
+        scalePaint.setStrokeWidth(10.0f);
+        scalePaint.setColor(ContextCompat.getColor(getContext(), (R.color.colorBackgroundDark)));
     }
 
     public void setValues(List<Integer> values)
@@ -78,24 +85,39 @@ public class GraphView extends View
             return;
         }
 
-        float width = getWidth();
-        float height = getHeight();
-
-        for (float index = 0; index < values.size() - 1; index++)
+        int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+        for (int index = 0; index < values.size(); index++)
         {
-            float x0 = index / values.size() * width;
-            float y0 = getAdjustedValue((int) index) / 100.0f * height;
-            float x1 = (index + 1) / values.size() * width;
-            float y1 = getAdjustedValue((int) index + 1) / 100.0f * height;
+            int rindex = values.size() - 1 - index;
+            if ((rindex - hour) % 24 == 0)
+            {
+                float x0 = getCurveX(index);
 
-            canvas.drawLine(x0, y0, x1, y1, paint);
+                canvas.drawLine(x0, 0, x0, getHeight(), scalePaint);
+            }
+        }
+
+        for (int index = 0; index < values.size() - 1; index++)
+        {
+            float x0 = getCurveX(index);
+            float y0 = getCurveY(index);
+            float x1 = getCurveX(index + 1);
+            float y1 = getCurveY(index + 1);
+
+            canvas.drawLine(x0, y0, x1, y1, curvePaint);
         }
 
         postInvalidateOnAnimation();
     }
 
-    private float getAdjustedValue(int index)
+    private float getCurveX(float index)
     {
-        return 100.0f - values.get(index) * animator.getAnimatedFraction();
+        return index / values.size() * getWidth() * 0.9f + getWidth() * 0.05f;
+    }
+
+    private float getCurveY(int index)
+    {
+        float adjustedValue = 100.0f - values.get(index) * animator.getAnimatedFraction();
+        return adjustedValue / 100.0f * getHeight() * 0.9f + getHeight() * 0.05f;
     }
 }
