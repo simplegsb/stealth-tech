@@ -18,7 +18,6 @@
         <activity android:name="nz.stealthcampers.stealthtech.view.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -35,8 +34,19 @@
             android:value="@string/google_maps_key" />
 
         <activity
+            android:name="nz.stealthcampers.stealthtech.view.ControlPanelActivity"
+            android:label="@string/control_panel">
+        </activity>
+
+        <activity
+            android:name="nz.stealthcampers.stealthtech.view.LightActivity"
+            android:label="@string/light">
+        </activity>
+
+        <activity
             android:name="nz.stealthcampers.stealthtech.view.MapActivity"
-            android:label="@string/title_activity_map"></activity>
+            android:label="@string/map">
+        </activity>
     </application>
 
 </manifest>

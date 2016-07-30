@@ -1,9 +1,8 @@
 package nz.stealthcampers.stealthtech.view;
 
+import android.app.Activity;
 import android.graphics.Point;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -18,18 +17,19 @@ import nz.stealthcampers.stealthtech.R;
 import nz.stealthcampers.stealthtech.common.Util;
 import nz.stealthcampers.stealthtech.model.Light;
 
-public class LightFragment extends Fragment
+public class LightActivity extends Activity
 {
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    public void onCreate(Bundle savedInstanceState)
     {
-        View rootView = inflater.inflate(R.layout.light_fragment, container, false);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_light);
 
-        final ViewGroup vanContainerView = (ViewGroup) rootView.findViewById(R.id.van_container);
+        final ViewGroup vanContainerView = (ViewGroup) findViewById(R.id.van_container);
 
-        ImageView vanView = (ImageView) rootView.findViewById(R.id.van);
-        vanView.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.fade_in));
-        Util.colorize(getActivity(), vanView, R.color.colorBackgroundDark);
+        ImageView vanView = (ImageView) findViewById(R.id.van);
+        vanView.startAnimation(AnimationUtils.loadAnimation(this, R.anim.fade_in));
+        Util.colorize(this, vanView, R.color.colorBackgroundDark);
 
         vanContainerView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener()
         {
@@ -39,8 +39,15 @@ public class LightFragment extends Fragment
                 vanContainerView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
 
                 List<Light> lights = new ArrayList<>();
-                lights.add(new Light(new Point(25, 25), true));
-                lights.add(new Light(new Point(60, 25), false));
+
+                Light light0 = new Light();
+                light0.on = true;
+                light0.position = new Point(25, 25);
+                lights.add(light0);
+
+                Light light1 = new Light();
+                light1.position = new Point(60, 25);
+                lights.add(light1);
 
                 for (final Light light : lights)
                 {
@@ -48,8 +55,6 @@ public class LightFragment extends Fragment
                 }
             }
         });
-
-        return rootView;
     }
 
     private void addLight(final Light light, ViewGroup vanContainerView)
@@ -59,24 +64,24 @@ public class LightFragment extends Fragment
         int glowSize = lightSize * 2;
         int glowOffsetY = -lightSize / 5;
 
-        final ImageView glowView = new ImageView(getActivity());
+        final ImageView glowView = new ImageView(this);
         RelativeLayout.LayoutParams glowParams = new RelativeLayout.LayoutParams(glowSize, glowSize);
-        glowParams.leftMargin = light.getPosition().x * vanContainerView.getWidth() / 100 - lightSize;
-        glowParams.topMargin = light.getPosition().y * vanContainerView.getHeight() / 100 - lightSize + glowOffsetY;
+        glowParams.leftMargin = light.position.x * vanContainerView.getWidth() / 100 - lightSize;
+        glowParams.topMargin = light.position.y * vanContainerView.getHeight() / 100 - lightSize + glowOffsetY;
         glowView.setLayoutParams(glowParams);
         glowView.setImageResource(R.drawable.glow);
         glowView.setVisibility(View.INVISIBLE);
-        Util.colorize(getActivity(), glowView, R.color.colorAccent);
+        Util.colorize(this, glowView, R.color.colorAccent);
 
         vanContainerView.addView(glowView);
 
-        ImageView lightView = new ImageView(getActivity());
+        ImageView lightView = new ImageView(this);
         RelativeLayout.LayoutParams lightParams = new RelativeLayout.LayoutParams(lightSize, lightSize);
-        lightParams.leftMargin = light.getPosition().x * vanContainerView.getWidth() / 100 - lightSizeHalf;
-        lightParams.topMargin = light.getPosition().y * vanContainerView.getHeight() / 100 - lightSizeHalf;
+        lightParams.leftMargin = light.position.x * vanContainerView.getWidth() / 100 - lightSizeHalf;
+        lightParams.topMargin = light.position.y * vanContainerView.getHeight() / 100 - lightSizeHalf;
         lightView.setLayoutParams(lightParams);
         lightView.setImageResource(R.drawable.light);
-        Util.colorize(getActivity(), lightView, R.color.colorPrimary);
+        Util.colorize(this, lightView, R.color.colorPrimary);
 
         vanContainerView.addView(lightView);
 
@@ -85,8 +90,8 @@ public class LightFragment extends Fragment
             @Override
             public void onClick(View view)
             {
-                light.toggle();
-                if (light.isOn())
+                light.on = !light.on;
+                if (light.on)
                 {
                     glowView.setVisibility(View.VISIBLE);
                 }
@@ -97,7 +102,7 @@ public class LightFragment extends Fragment
             }
         });
 
-        if (light.isOn())
+        if (light.on)
         {
             glowView.setVisibility(View.VISIBLE);
         }
@@ -106,7 +111,7 @@ public class LightFragment extends Fragment
     private int getLightSize()
     {
         Point screenSize = new Point();
-        getActivity().getWindowManager().getDefaultDisplay().getSize(screenSize);
+        getWindowManager().getDefaultDisplay().getSize(screenSize);
 
         return (int) (Math.min(screenSize.x, screenSize.y) * 0.1f);
     }
