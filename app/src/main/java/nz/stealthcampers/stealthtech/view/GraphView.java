@@ -12,6 +12,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import nz.stealthcampers.stealthtech.R;
+import nz.stealthcampers.stealthtech.common.Constants;
 
 public class GraphView extends View
 {
@@ -94,7 +95,7 @@ public class GraphView extends View
         for (int index = 0; index < values.size(); index++)
         {
             int rindex = values.size() - 1 - index;
-            if ((rindex - hour) % 24 == 0)
+            if ((rindex - hour) % Constants.SAMPLES_PER_DAY == 0)
             {
                 float x0 = getCurveX(index);
 

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import nz.stealthcampers.stealthtech.common.Constants;
 import nz.stealthcampers.stealthtech.model.Light;
 
 public class MyVan
@@ -30,7 +31,7 @@ public class MyVan
 
     static
     {
-        int sevenDays = 24 * 7;
+        int sevenDays = Constants.SAMPLES_PER_DAY * 7;
 
         fridge = random.nextBoolean();
         heater = random.nextBoolean();
