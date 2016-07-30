@@ -3,4 +3,7 @@
     <string name="control_panel">Control Panel</string>
     <string name="light">Lights</string>
     <string name="map">Map</string>
+    <string name="water">Water</string>
+    <string name="water_heater">Heater</string>
+    <string name="water_pump">Pump</string>
 </resources>

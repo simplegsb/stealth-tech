@@ -47,6 +47,11 @@
             android:name="nz.stealthcampers.stealthtech.view.MapActivity"
             android:label="@string/map">
         </activity>
+
+        <activity
+            android:name="nz.stealthcampers.stealthtech.view.WaterActivity"
+            android:label="@string/water">
+        </activity>
     </application>
 
 </manifest>

@@ -8,6 +8,8 @@ import android.widget.BaseAdapter;
 
 import java.util.List;
 
+import nz.stealthcampers.stealthtech.common.Constants;
+
 public class GridAdapter extends BaseAdapter
 {
     private Activity activity;
@@ -43,15 +45,14 @@ public class GridAdapter extends BaseAdapter
     {
         final GridItem item = items.get(position);
 
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable()
+        new Handler().postDelayed(new Runnable()
         {
             @Override
             public void run()
             {
                 item.show(activity);
             }
-        }, 1000);
+        }, Constants.SHOW_DELAY);
 
         return item.getView(activity);
     }

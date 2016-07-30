@@ -26,6 +26,14 @@ public class ControlPanelActivity extends Activity
         water.iconResource = R.drawable.water;
         water.gauge = true;
         water.value = 50;
+        water.listener = new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                startActivity(new Intent(ControlPanelActivity.this, WaterActivity.class));
+            }
+        };
         items.add(water);
 
         GridItem gas = new GridItem();
