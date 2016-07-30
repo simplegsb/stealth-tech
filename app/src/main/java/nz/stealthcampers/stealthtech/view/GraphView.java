@@ -92,10 +92,12 @@ public class GraphView extends View
         }
 
         int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+        int hourSample = hour / (24 / Constants.SAMPLES_PER_DAY);
+
         for (int index = 0; index < values.size(); index++)
         {
             int rindex = values.size() - 1 - index;
-            if ((rindex - hour) % Constants.SAMPLES_PER_DAY == 0)
+            if ((rindex - hourSample) % Constants.SAMPLES_PER_DAY == 0)
             {
                 float x0 = getCurveX(index);
 
