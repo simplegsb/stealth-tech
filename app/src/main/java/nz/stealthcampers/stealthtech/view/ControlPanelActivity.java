@@ -11,6 +11,7 @@ import android.widget.GridView;
 import java.util.ArrayList;
 import java.util.List;
 
+import nz.stealthcampers.stealthtech.MyVan;
 import nz.stealthcampers.stealthtech.R;
 import nz.stealthcampers.stealthtech.common.Constants;
 import nz.stealthcampers.stealthtech.common.Util;
@@ -28,8 +29,8 @@ public class ControlPanelActivity extends Activity
         GridItemView water = GridItemView.inflate(this);
         water.iconResource = R.drawable.water;
         water.gauge = true;
-        water.value = 50;
-        water.secondaryValue = 60;
+        water.value = MyVan.freshWater.get(MyVan.freshWater.size() - 1);
+        water.secondaryValue = MyVan.wasteWater.get(MyVan.wasteWater.size() - 1);
         water.listener = new View.OnClickListener()
         {
             @Override
@@ -43,19 +44,19 @@ public class ControlPanelActivity extends Activity
         GridItemView gas = GridItemView.inflate(this);
         gas.iconResource = R.drawable.gas;
         gas.gauge = true;
-        gas.value = 10;
+        gas.value = MyVan.gas.get(MyVan.gas.size() - 1);
         items.add(gas);
 
         GridItemView battery = GridItemView.inflate(this);
         battery.iconResource = R.drawable.battery;
         battery.gauge = true;
-        battery.value = 100;
+        battery.value = MyVan.battery.get(MyVan.battery.size() - 1);
         items.add(battery);
 
         GridItemView fuel = GridItemView.inflate(this);
         fuel.iconResource = R.drawable.fuel;
         fuel.gauge = true;
-        fuel.value = 70;
+        fuel.value = MyVan.fuel.get(MyVan.fuel.size() - 1);
         items.add(fuel);
 
         GridItemView light = GridItemView.inflate(this);
@@ -72,7 +73,7 @@ public class ControlPanelActivity extends Activity
 
         final GridItemView fridge = GridItemView.inflate(this);
         fridge.iconResource = R.drawable.fridge;
-        fridge.value = 1;
+        fridge.value = MyVan.fridge ? 1 : 0;
         fridge.listener = new View.OnClickListener()
         {
             @Override
@@ -85,6 +86,7 @@ public class ControlPanelActivity extends Activity
 
         final GridItemView heater = GridItemView.inflate(this);
         heater.iconResource = R.drawable.heater;
+        heater.value = MyVan.heater ? 1 : 0;
         heater.listener = new View.OnClickListener()
         {
             @Override
