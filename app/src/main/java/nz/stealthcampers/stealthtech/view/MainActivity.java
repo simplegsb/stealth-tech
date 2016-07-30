@@ -1,10 +1,12 @@
-package nz.stealthcampers.stealthtech;
+package nz.stealthcampers.stealthtech.view;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
+
+import nz.stealthcampers.stealthtech.R;
 
 public class MainActivity extends FragmentActivity
 {

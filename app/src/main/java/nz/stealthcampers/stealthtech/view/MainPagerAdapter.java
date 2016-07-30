@@ -1,4 +1,4 @@
-package nz.stealthcampers.stealthtech;
+package nz.stealthcampers.stealthtech.view;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

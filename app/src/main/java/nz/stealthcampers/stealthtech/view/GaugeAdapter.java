@@ -1,9 +1,7 @@
-package nz.stealthcampers.stealthtech;
+package nz.stealthcampers.stealthtech.view;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +10,12 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 
 import java.util.List;
+
+import nz.stealthcampers.stealthtech.R;
+import nz.stealthcampers.stealthtech.common.Util;
+import nz.stealthcampers.stealthtech.model.Gauge;
 
 public class GaugeAdapter extends BaseAdapter
 {

@@ -1,4 +1,4 @@
-package nz.stealthcampers.stealthtech;
+package nz.stealthcampers.stealthtech.view;
 
 import android.graphics.Point;
 import android.os.Bundle;
@@ -13,6 +13,10 @@ import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import nz.stealthcampers.stealthtech.R;
+import nz.stealthcampers.stealthtech.common.Util;
+import nz.stealthcampers.stealthtech.model.Light;
 
 public class LightFragment extends Fragment
 {

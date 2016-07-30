@@ -1,4 +1,4 @@
-package nz.stealthcampers.stealthtech;
+package nz.stealthcampers.stealthtech.common;
 
 import android.content.Context;
 import android.graphics.Color;

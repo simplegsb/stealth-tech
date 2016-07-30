@@ -1,5 +1,6 @@
-package nz.stealthcampers.stealthtech;
+package nz.stealthcampers.stealthtech.view;
 
+import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,9 @@ import android.widget.GridView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import nz.stealthcampers.stealthtech.R;
+import nz.stealthcampers.stealthtech.model.Gauge;
 
 public class GaugeFragment extends Fragment
 {
@@ -29,6 +33,15 @@ public class GaugeFragment extends Fragment
         GridView gridview = (GridView) rootView.findViewById(R.id.gauges);
         gridview.setAdapter(new GaugeAdapter(getActivity(), gauges, gaugeSize));
         gridview.setColumnWidth(gaugeSize);
+
+        rootView.findViewById(R.id.map).setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                startActivity(new Intent(getActivity(), MapActivity.class));
+            }
+        });
 
         return rootView;
     }

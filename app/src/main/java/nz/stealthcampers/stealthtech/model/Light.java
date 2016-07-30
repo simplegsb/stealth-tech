@@ -1,4 +1,4 @@
-package nz.stealthcampers.stealthtech;
+package nz.stealthcampers.stealthtech.model;
 
 import android.graphics.Point;
 
