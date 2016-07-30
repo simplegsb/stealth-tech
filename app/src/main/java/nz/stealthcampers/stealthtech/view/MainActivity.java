@@ -3,13 +3,17 @@ package nz.stealthcampers.stealthtech.view;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.GridView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import nz.stealthcampers.stealthtech.R;
+import nz.stealthcampers.stealthtech.common.Constants;
 import nz.stealthcampers.stealthtech.common.Util;
 
 public class MainActivity extends Activity
@@ -20,9 +24,9 @@ public class MainActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        List<GridItem> items = new ArrayList<>();
+        List<GridItemView> items = new ArrayList<>();
 
-        GridItem controlPanel = new GridItem();
+        GridItemView controlPanel = GridItemView.inflate(this);
         controlPanel.iconResource = R.drawable.van;
         controlPanel.listener = new View.OnClickListener()
         {
@@ -34,7 +38,7 @@ public class MainActivity extends Activity
         };
         items.add(controlPanel);
 
-        GridItem map = new GridItem();
+        GridItemView map = GridItemView.inflate(this);
         map.iconResource = R.drawable.map;
         map.listener = new View.OnClickListener()
         {
@@ -46,12 +50,23 @@ public class MainActivity extends Activity
         };
         items.add(map);
 
-        GridItem chat = new GridItem();
+        GridItemView chat = GridItemView.inflate(this);
         chat.iconResource = R.drawable.chat;
         items.add(chat);
 
+        new Handler().postDelayed(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                View root = findViewById(R.id.root);
+                root.setVisibility(View.VISIBLE);
+                root.startAnimation(AnimationUtils.loadAnimation(MainActivity.this, R.anim.fade_in));
+            }
+        }, Constants.SHOW_DELAY);
+
         GridView gridview = (GridView) findViewById(R.id.activities);
-        gridview.setAdapter(new GridAdapter(this, items));
+        gridview.setAdapter(new GridAdapter(items));
         gridview.setColumnWidth(Util.getGridItemSize(this));
     }
 }

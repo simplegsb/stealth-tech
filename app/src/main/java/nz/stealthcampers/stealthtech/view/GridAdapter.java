@@ -12,13 +12,10 @@ import nz.stealthcampers.stealthtech.common.Constants;
 
 public class GridAdapter extends BaseAdapter
 {
-    private Activity activity;
+    private List<GridItemView> items;
 
-    private List<GridItem> items;
-
-    public GridAdapter(Activity activity, List<GridItem> items)
+    public GridAdapter(List<GridItemView> items)
     {
-        this.activity = activity;
         this.items = items;
     }
 
@@ -43,17 +40,17 @@ public class GridAdapter extends BaseAdapter
     @Override
     public View getView(int position, View convertView, ViewGroup parent)
     {
-        final GridItem item = items.get(position);
+        final GridItemView item = items.get(position);
 
         new Handler().postDelayed(new Runnable()
         {
             @Override
             public void run()
             {
-                item.show(activity);
+                item.setVisibility(View.VISIBLE);
             }
         }, Constants.SHOW_DELAY);
 
-        return item.getView(activity);
+        return item;
     }
 }

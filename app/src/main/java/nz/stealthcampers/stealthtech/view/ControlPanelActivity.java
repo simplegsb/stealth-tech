@@ -3,13 +3,16 @@ package nz.stealthcampers.stealthtech.view;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.GridView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import nz.stealthcampers.stealthtech.R;
+import nz.stealthcampers.stealthtech.common.Constants;
 import nz.stealthcampers.stealthtech.common.Util;
 
 public class ControlPanelActivity extends Activity
@@ -20,9 +23,9 @@ public class ControlPanelActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_control_panel);
 
-        List<GridItem> items = new ArrayList<>();
+        List<GridItemView> items = new ArrayList<>();
 
-        GridItem water = new GridItem();
+        GridItemView water = GridItemView.inflate(this);
         water.iconResource = R.drawable.water;
         water.gauge = true;
         water.value = 50;
@@ -36,25 +39,25 @@ public class ControlPanelActivity extends Activity
         };
         items.add(water);
 
-        GridItem gas = new GridItem();
+        GridItemView gas = GridItemView.inflate(this);
         gas.iconResource = R.drawable.gas;
         gas.gauge = true;
         gas.value = 10;
         items.add(gas);
 
-        GridItem battery = new GridItem();
+        GridItemView battery = GridItemView.inflate(this);
         battery.iconResource = R.drawable.battery;
         battery.gauge = true;
         battery.value = 100;
         items.add(battery);
 
-        GridItem fuel = new GridItem();
+        GridItemView fuel = GridItemView.inflate(this);
         fuel.iconResource = R.drawable.fuel;
         fuel.gauge = true;
         fuel.value = 70;
         items.add(fuel);
 
-        GridItem light = new GridItem();
+        GridItemView light = GridItemView.inflate(this);
         light.iconResource = R.drawable.light;
         light.listener = new View.OnClickListener()
         {
@@ -66,7 +69,7 @@ public class ControlPanelActivity extends Activity
         };
         items.add(light);
 
-        final GridItem fridge = new GridItem();
+        final GridItemView fridge = GridItemView.inflate(this);
         fridge.iconResource = R.drawable.fridge;
         fridge.value = 1;
         fridge.listener = new View.OnClickListener()
@@ -74,13 +77,24 @@ public class ControlPanelActivity extends Activity
             @Override
             public void onClick(View view)
             {
-                fridge.animateValue(ControlPanelActivity.this, Math.abs(fridge.value - 1));
+                fridge.animateValue(Math.abs(fridge.value - 1));
             }
         };
         items.add(fridge);
 
+        new Handler().postDelayed(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                View root = findViewById(R.id.root);
+                root.setVisibility(View.VISIBLE);
+                root.startAnimation(AnimationUtils.loadAnimation(ControlPanelActivity.this, R.anim.fade_in));
+            }
+        }, Constants.SHOW_DELAY);
+
         GridView gridview = (GridView) findViewById(R.id.controls);
-        gridview.setAdapter(new GridAdapter(this, items));
+        gridview.setAdapter(new GridAdapter(items));
         gridview.setColumnWidth(Util.getGridItemSize(this));
     }
 }

@@ -3,6 +3,7 @@ package nz.stealthcampers.stealthtech.view;
 import android.app.Activity;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nz.stealthcampers.stealthtech.R;
+import nz.stealthcampers.stealthtech.common.Constants;
 import nz.stealthcampers.stealthtech.common.Util;
 import nz.stealthcampers.stealthtech.model.Light;
 
@@ -25,36 +27,37 @@ public class LightActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_light);
 
-        final ViewGroup vanContainerView = (ViewGroup) findViewById(R.id.van_container);
-
         ImageView vanView = (ImageView) findViewById(R.id.van);
         vanView.startAnimation(AnimationUtils.loadAnimation(this, R.anim.fade_in));
         Util.colorize(this, vanView, R.color.colorBackgroundDark);
 
-        vanContainerView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener()
+        final List<Light> lights = new ArrayList<>();
+
+        Light light0 = new Light();
+        light0.on = true;
+        light0.position = new Point(25, 25);
+        lights.add(light0);
+
+        Light light1 = new Light();
+        light1.position = new Point(60, 25);
+        lights.add(light1);
+
+        new Handler().postDelayed(new Runnable()
         {
             @Override
-            public void onGlobalLayout()
+            public void run()
             {
-                vanContainerView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                View root = findViewById(R.id.root);
+                root.setVisibility(View.VISIBLE);
+                root.startAnimation(AnimationUtils.loadAnimation(LightActivity.this, R.anim.fade_in));
 
-                List<Light> lights = new ArrayList<>();
-
-                Light light0 = new Light();
-                light0.on = true;
-                light0.position = new Point(25, 25);
-                lights.add(light0);
-
-                Light light1 = new Light();
-                light1.position = new Point(60, 25);
-                lights.add(light1);
-
+                ViewGroup vanContainerView = (ViewGroup) findViewById(R.id.van_container);
                 for (final Light light : lights)
                 {
                     addLight(light, vanContainerView);
                 }
             }
-        });
+        }, Constants.SHOW_DELAY);
     }
 
     private void addLight(final Light light, ViewGroup vanContainerView)

@@ -22,7 +22,7 @@ public class WaterActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_water);
 
-        final GridItem water = new GridItem();
+        final GridItemView water = GridItemView.inflate(this);
         water.iconResource = R.drawable.water;
         water.gauge = true;
         water.value = 50;
@@ -41,12 +41,13 @@ public class WaterActivity extends Activity
             @Override
             public void run()
             {
-                ViewGroup topView = (ViewGroup) findViewById(R.id.top);
-                topView.setVisibility(View.VISIBLE);
-                topView.startAnimation(AnimationUtils.loadAnimation(WaterActivity.this, R.anim.fade_in));
+                View root = findViewById(R.id.root);
+                root.setVisibility(View.VISIBLE);
+                root.startAnimation(AnimationUtils.loadAnimation(WaterActivity.this, R.anim.fade_in));
 
-                topView.addView(water.getView(WaterActivity.this), 0);
-                water.show(WaterActivity.this);
+                ViewGroup topView = (ViewGroup) findViewById(R.id.top);
+                topView.addView(water, 0);
+                water.setVisibility(View.VISIBLE);
 
                 GraphView historyView = (GraphView) findViewById(R.id.history);
                 historyView.setValues(history);

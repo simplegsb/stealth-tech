@@ -7,7 +7,6 @@ import android.graphics.Paint;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.animation.AnimationUtils;
 
 import java.util.List;
 
@@ -60,16 +59,15 @@ public class GraphView extends View
     @Override
     public void setVisibility(int visibility)
     {
-        super.setVisibility(visibility);
-
-        if (visibility == View.VISIBLE)
+        if (getVisibility() == INVISIBLE && visibility == View.VISIBLE)
         {
-            startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_in));
             animator.setDuration(1000);
             animator.start();
 
             postInvalidateOnAnimation();
         }
+
+        super.setVisibility(visibility);
     }
 
     @Override
